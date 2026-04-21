@@ -1,0 +1,8 @@
+.env
+last_analysis.txt
+uploads/
+static/
+__pycache__/
+*.pyc
+.DS_Store
+templates/index.htmly
