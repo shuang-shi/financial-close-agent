@@ -1,0 +1,368 @@
+
+
+# CLOSE INTELLIGENCE REPORT — INSURANCE COMPANY MONTHLY FINANCIAL CLOSE
+
+**Prepared by:** Senior Advisory Manager, Big 4 Advisory Practice
+**Period Under Review:** March 2025 Monthly Close
+**ERP System:** SAP
+**Date of Report:** April 2025
+
+---
+
+## SECTION 1 — JOURNAL ENTRY ANOMALIES
+
+### Anomaly 1: Segregation of Duties Violation — IBNR Reserve Posting
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Segregation of Duties (SOD) Violation — Preparer is also the Approver |
+| **SAP Document Number** | 100000222 |
+| **Amount** | $1,842,300.00 |
+| **Specific Evidence** | Preparer **A. Chen** is recorded as both preparer and approver on this IBNR reserve posting dated 2025-03-17. The entry debits account **5000100** (Loss & LAE Incurred) and credits account **2000200** (IBNR Reserve). IBNR reserves are inherently subjective, actuarially-driven estimates that are a primary area of management judgment in insurance accounting. Self-approval of a nearly $1.85M reserve entry entirely circumvents the independent review control that exists to prevent both error and fraud in reserve estimation. There is no indication of a compensating control (e.g., secondary actuarial sign-off). |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 2: Round-Dollar Loss Reserve Adjustment — Potential Estimate Manipulation
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Round-Dollar Amount / Potential Management Estimate Override |
+| **SAP Document Number** | 100000221 |
+| **Amount** | $5,000,000.00 |
+| **Specific Evidence** | Prepared by **J. Smith** on 2025-03-15, this entry debits account **5000100** (Loss & LAE Incurred) and credits account **2000100** (Loss Reserve). A perfectly round $5.0M loss reserve adjustment is highly unusual—actuarial loss development analyses virtually never produce exact round figures. This is the single largest journal entry in the population. Combined with the description "Loss reserve adjustment," this suggests a top-side management override rather than a systematically derived actuarial calculation. Approved by D. Lee at 14:57, within normal hours, but no supporting actuarial documentation is referenced. The entry directly contributes to the material variance observed in account 2000100. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 3: Round-Dollar Tax Provision Adjustment Posted After Hours
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Round-Dollar Amount / Off-Hours Posting |
+| **SAP Document Number** | 100000231 |
+| **Amount** | $3,000,000.00 |
+| **Specific Evidence** | Prepared by **L. Patel** on 2025-03-08, posted at **22:24** (well outside normal business hours of 7:00 AM–6:00 PM). This entry debits account **5700100** (Tax Expense) and credits account **2300100** (Deferred Tax Liability). A precisely round $3.0M tax provision adjustment is atypical—tax provisions are calculated using effective tax rates applied to pre-tax income and typically produce non-round figures. The late-night posting time raises questions about whether proper review occurred. Notably, account **2300100** (Deferred Tax Liability) also has an **SOD violation in its reconciliation** (see Section 3), meaning the control chain from entry to reconciliation is compromised for this account. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 4: Duplicate Premium Receipt Entries — Possible Double-Booking of Revenue
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Duplicate Amount Entries — Potential Revenue Overstatement |
+| **SAP Document Number** | 100000225 and 100000226 |
+| **Amount** | $847,320.00 each (total: $1,694,640.00) |
+| **Specific Evidence** | Two separate journal entries for "Premium receipt – Commercial" record the identical amount of $847,320.00 to the same account combination: debit **1000100** (Cash – Operating Account) and credit **4000100** (Premium Revenue). Document 100000225 was prepared by **K. Johnson** on 2025-03-08; document 100000226 was prepared by **B. Williams** on 2025-03-15. Different preparers posting the same amount one week apart with identical descriptions and account coding strongly suggests a double-booking of a single commercial premium receipt. If both entries stand, premium revenue (account 4000100) and cash (account 1000100) are each overstated by $847,320. This directly contributes to the 18.6% variance in the Cash – Operating Account (1000100). |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 5: Manual Loss Adjustment Override — Large Off-Hours Posting
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Manual Override of Systematic Process / Large Unusual Entry |
+| **SAP Document Number** | 100000230 |
+| **Amount** | $4,750,000.00 |
+| **Specific Evidence** | Prepared by **M. Rodriguez** and approved by **T. Brown**, posted at **17:23** on a date in March 2025. The description "Manual loss adjustment override" explicitly identifies this as a manual override of the systematic loss adjustment process. The entry debits account **2000100** (Loss Reserve, a liability) and credits account **5000300** (a loss expense account), effectively **reducing** the loss reserve by $4.75M and crediting income. This is the second-largest entry in the data set. The direction of the entry (releasing reserves into income) combined with the manual override nature and the near-close timing warrants significant scrutiny. While posted at 17:23 (technically within hours), it is near end-of-day when supervisory oversight may be reduced. This entry directly offsets the $5.0M reserve increase in document 100000221, suggesting potential reserve management behavior—booking a large reserve-up and a large reserve-down to arrive at a net desired outcome. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 6: Investment Reclassification Posted at 2:27 AM
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Off-Hours Posting / Large Reclassification |
+| **SAP Document Number** | 100000223 |
+| **Amount** | $3,250,000.00 |
+| **Specific Evidence** | Prepared by **M. Rodriguez** and approved by **T. Brown**, this entry was posted at **02:27 AM**—deep overnight, far outside normal business hours. The entry reclassifies $3.25M from account **1200200** to account **1200300** (Equity Securities). In an insurance company, investment classification directly impacts the income statement through realized/unrealized gains treatment and statutory capital calculations. The overnight posting time raises serious questions about the authenticity of the approval by T. Brown at 2:27 AM. This entry is directly connected to the open reconciling item on account 1200300 (Equity Securities), which shows $450,000 in open items with a note "Equity position reclass pending." |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 7: Reinsurance Premium Accrual Posted at 11:22 PM
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Off-Hours Posting / Large Accrual Entry |
+| **SAP Document Number** | 100000227 |
+| **Amount** | $2,180,000.00 |
+| **Specific Evidence** | Prepared by **J. Smith** and approved by **D. Lee**, posted at **23:22**. This entry debits account **5400100** (Reinsurance Expense) and credits account **2100100** (Reinsurance Payable). A $2.18M reinsurance premium accrual posted at 11:22 PM is unusual. Reinsurance accruals in an insurance company should be derived from treaty terms and systematic calculations, not posted manually late at night. The timing suggests this may have been a rushed close entry with limited review. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Anomaly 8: Pervasive Off-Hours Posting Pattern
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Systemic Control Environment Weakness — Off-Hours Posting Volume |
+| **SAP Document Numbers** | 100000019 (02:15), 100000050 (01:56), 100000054 (02:22), 100000057 (01:16), 100000069 (23:33), 100000103 (03:06), 100000116 (22:37), 100000161 (00:42), 100000223 (02:27), 100000231 (22:24), and others |
+| **Amount** | Various (aggregate exposure in tens of millions) |
+| **Specific Evidence** | 54 of 231 total entries (23.4%) were posted outside normal business hours. This is an extraordinarily high rate. Among the large entries (>$1M), at least 11 were posted between 10:00 PM and 3:06 AM. Specific deep-overnight entries include: 100000019 (L. Patel, $1,391,069.53 at 02:15), 100000050 (B. Williams, $1,003,306.55 payroll at 01:56), 100000054 (L. Patel, $1,415,828.16 at 02:22), 100000057 (K. Johnson, $2,149,926.13 at 01:16), 100000103 (B. Williams, $1,372,594.12 at 03:06), and 100000161 (A. Chen, $1,309,685.21 at 00:42). While some may be automated batch postings, the variety of preparers and descriptions suggests manual entry during overnight hours when approver oversight is questionable. The validity of approvals at these hours must be challenged. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Anomaly 9: Payroll Entry Posted at 1:56 AM
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Off-Hours Posting / Unusual Entry Type |
+| **SAP Document Number** | 100000050 |
+| **Amount** | $1,003,306.55 |
+| **Specific Evidence** | Prepared by **B. Williams** and approved by **S. Gupta** at **01:56 AM**. This is a payroll posting debiting account **5300200** and crediting account **2100300** (Accrued Expenses). Payroll entries are typically systematic and posted during business hours from the payroll sub-ledger. A manual payroll posting at 1:56 AM for just over $1M is unusual and warrants investigation into whether this represents a legitimate payroll accrual or an unauthorized entry. Account 2100300 shows $680,000 in open reconciling items in the reconciliation data, further suggesting control issues in this account. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Anomaly 10: Reserve Entries Netting Pattern — Potential Reserve Manipulation
+
+| Field | Detail |
+|---|---|
+| **Anomaly Type** | Offsetting Manual Reserve Entries — Possible Earnings Management |
+| **SAP Document Numbers** | 100000221 ($5,000,000), 100000230 ($4,750,000), 100000222 ($1,842,300) |
+| **Amount** | Net impact: $2,092,300 reserve increase |
+| **Specific Evidence** | Three large manual reserve entries were posted within the same close period: (1) Doc 100000221 **increases** Loss Reserve (2000100) by $5.0M; (2) Doc 100000230 **decreases** Loss Reserve (2000100) by $4.75M; (3) Doc 100000222 increases IBNR Reserve (2000200) by $1.842M. The near-perfect offset between documents 100000221 and 100000230 ($250K net) raises the question of why management would book a $5.0M reserve increase only to release $4.75M from the same reserve category in the same period. This pattern is consistent with reserve management or "cookie jar" reserve behavior—an area of significant regulatory and audit concern for insurance entities. The IBNR entry (100000222) has an SOD violation compounding the risk. All three entries involve subjective actuarial estimates, which are the highest-risk area for management override of controls under ASU/IFRS frameworks and state insurance regulatory requirements. |
+| **Risk Level** | **HIGH** |
+
+---
+
+## SECTION 2 — TRIAL BALANCE VARIANCES
+
+### Variance 1: Account 1000100 — Cash – Operating Account
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1000100 |
+| **Account Name** | Cash – Operating Account |
+| **Current Balance** | $45,200,000 |
+| **Prior Balance** | $38,100,000 |
+| **Variance** | +$7,100,000 (18.6%) |
+| **Why Unusual** | An 18.6% increase ($7.1M) in the operating cash account is significant and may not be fully explained by organic business growth. Contributing factors from journal entry data include: (1) the potential **duplicate premium receipts** (documents 100000225 and 100000226) totaling $1,694,640 which would overstate cash by $847,320; (2) numerous premium receipt entries crediting 1000100, many posted during off-hours. In an insurance company, cash balances are typically managed tightly due to investment income optimization—a surplus of $7.1M sitting in an operating account rather than invested is unusual and suggests either timing issues with investment deployment or posting errors. The variance should be analyzed against premium volume growth, claims payment timing (noting account 1000200 declined), and investment purchase activity. The fact that the Claims Disbursement Account (1000200) decreased 12% simultaneously suggests cash may be accumulating in the operating account due to delayed claims processing or misdirected postings. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Variance 2: Account 1000200 — Cash – Claims Disbursement Account
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1000200 |
+| **Account Name** | Cash – Claims Disbursement Account |
+| **Current Balance** | $12,500,000 |
+| **Prior Balance** | $14,200,000 |
+| **Variance** | -$1,700,000 (-12.0%) |
+| **Why Unusual** | A 12% decline in the claims disbursement account while the operating cash account simultaneously increased 18.6% creates a divergent cash movement pattern. For an insurance company, claims disbursement cash levels are driven by claims payment volume and timing. A declining balance could indicate: (1) accelerated claims payments reducing the float; (2) under-funding of the disbursement account; or (3) claims activity shifting. When viewed alongside the aggressive reserve movements (documents 100000221, 100000222, 100000230), the declining claims cash combined with reserve manipulation patterns warrants investigation into whether reserve adjustments reflect genuine claims development or are disconnected from actual claims payment experience. If reserves are being increased on paper (100000221) while claims cash is declining, the economic substance should be validated against actuarial loss triangles. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Variance 3: Account 1700100 — Other Assets
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1700100 |
+| **Account Name** | Other Assets |
+| **Current Balance** | $6,300,000 |
+| **Prior Balance** | $5,100,000 |
+| **Variance** | +$1,200,000 (23.5%) |
+| **Why Unusual** | A 23.5% increase in "Other Assets" is a significant red flag. "Other Assets" is a catch-all category that, in insurance companies, can be used to park items that don't clearly belong elsewhere—making it a high-risk account for misclassification, premature asset recognition, or concealment of losses. **Critically, this account's reconciliation has NOT BEEN STARTED** (preparer K. Johnson, status: OVERDUE). A $6.3M balance with a 23.5% variance that has not been reconciled represents a material uncontrolled exposure. Without a completed reconciliation, there is no assurance that the $1.2M increase is valid, properly classified, or supported by underlying documentation. The combination of a large unexplained variance and a completely absent reconciliation constitutes a control failure of the highest order. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Variance 4: Account 4200200 — Net Realized Gains/Losses
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 4200200 |
+| **Account Name** | Net Realized Gains/Losses |
+| **Current Balance** | -$1,200,000 |
+| **Prior Balance** | -$800,000 |
+| **Variance** | -$400,000 (-50.0%) |
+| **Why Unusual** | A 50% deterioration in net realized losses (from -$800K to -$1.2M) is a material adverse movement in investment performance. For an insurance company, investment income is a critical component of profitability and is closely monitored by regulators and rating agencies. This variance should be evaluated in conjunction with document **100000223** (Investment reclassification of $3.25M between accounts 1200200 and 1200300 posted at 02:27 AM by M. Rodriguez). Investment reclassifications directly impact the realized vs. unrealized gain/loss categorization. The overnight reclassification may have been executed specifically to manage the presentation of investment losses between the realized (income statement) and unrealized (OCI) categories. A 50% variance in a period without documented market dislocation requires detailed trade-level support and validation that the reclassification was in compliance with the entity's investment accounting policy and applicable standards (ASC 320/IFRS 9). |
+| **Risk Level** | **HIGH** |
+
+---
+
+## SECTION 3 — RECONCILIATION CONTROL RISKS
+
+### Control Risk 1: Account 1700100 — Other Assets — Reconciliation Not Started
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1700100 |
+| **Account Name** | Other Assets |
+| **Control Failure Type** | Complete Reconciliation Failure — Overdue / Not Started |
+| **Specific Evidence** | Preparer **K. Johnson** has not initiated the reconciliation for account 1700100 (Other Assets) with a GL balance of **$6,300,000**. The status is listed as "Reconciliation not yet prepared — OVERDUE." This account shows a **23.5% variance** ($1.2M increase) versus the prior period. Without a reconciliation, there is zero assurance over the composition, existence, valuation, or proper classification of $6.3M in assets. In an insurance regulatory environment, unreconciled asset balances can impact statutory surplus calculations, risk-based capital ratios, and regulatory filing accuracy. This is a fundamental control breakdown—an account with a material balance and a material variance has no reconciliation whatsoever. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Control Risk 2: Account 2300100 — Deferred Tax Liability — SOD Violation in Reconciliation
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 2300100 |
+| **Account Name** | Deferred Tax Liability |
+| **Control Failure Type** | Segregation of Duties Violation — Preparer is Approver |
+| **Specific Evidence** | **J. Smith** is recorded as both the preparer and the approver of the reconciliation for account 2300100 (Deferred Tax Liability). This is a direct SOD violation documented in the reconciliation data with the note "SOD VIOLATION: Preparer = Approver." This control failure is compounded by the fact that document **100000231** ($3,000,000 tax provision adjustment, posted at 22:24 by L. Patel) credits this same account. The deferred tax liability account is being fed by a round-dollar, off-hours journal entry AND its reconciliation lacks independent review. The entire control chain from entry origination through reconciliation approval is compromised for this account. Deferred tax accounts involve significant judgment (temporary differences, valuation allowances, tax rate assumptions) and are a known area of financial reporting risk. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Control Risk 3: Account 2000200 — IBNR Reserve — Large Open Reconciling Items with SOD-Compromised JE
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 2000200 |
+| **Account Name** | IBNR Reserve |
+| **Control Failure Type** | Large Unresolved Reconciling Items / Dependency on Pending Third-Party Support |
+| **Specific Evidence** | Account 2000200 (IBNR Reserve) has a GL balance of **-$89,000,000** with **$2,100,000 in open reconciling items** aged 38 days. The notes indicate "Actuarial IBNR support pending from reserving team." The IBNR reserve is the largest liability on the balance sheet and the $2.1M open item represents a reconciliation gap where the GL balance cannot be fully tied to actuarial support. Furthermore, document **100000222** ($1,842,300 IBNR reserve posting) that feeds this account has an **SOD violation** (A. Chen as both preparer and approver). The combination of (a) the most material and judgmental liability on an insurance company's balance sheet, (b) $2.1M in unsupported reconciling items, and (c) an SOD-compromised journal entry feeding the account creates a cascading control failure across multiple control layers. |
+| **Risk Level** | **HIGH** |
+
+---
+
+### Control Risk 4: Account 1500200 — Intangible Assets — Reconciling Items Aged Over 90 Days
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1500200 |
+| **Account Name** | Intangible Assets |
+| **Control Failure Type** | Aged Reconciling Items Exceeding Policy Threshold / Stale Unresolved Dispute |
+| **Specific Evidence** | Account 1500200 (Intangible Assets) has a GL balance of **$12,000,000** with **$400,000 in open reconciling items** aged **91 days**. The note states "Intangible asset amortization dispute — AGED > 90 DAYS." This is the only account in the entire reconciliation population with items exceeding 90 days. A 91-day-old amortization dispute suggests the issue has persisted through at least three monthly close cycles without resolution. This indicates a breakdown in the escalation process and management's inability or unwillingness to resolve the item. While $400K on a $12M balance (3.3%) may seem modest, intangible asset amortization disputes can indicate disagreements over useful life, impairment indicators, or asset existence—all of which have financial statement and regulatory implications. The persistence of this item suggests reconciliation review is not effectively driving resolution. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Control Risk 5: Account 1100200 — Reinsurance Receivable — Settlement Delay Risk
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1100200 |
+| **Account Name** | Reinsurance Receivable |
+| **Control Failure Type** | Extended Open Reconciling Items / Counterparty Settlement Risk |
+| **Specific Evidence** | Account 1100200 (Reinsurance Receivable) carries a GL balance of **$23,400,000** with **$890,000 in open reconciling items** aged **62 days**. The note indicates "Reinsurance treaty settlement delayed." In an insurance context, reinsurance receivables represent credit exposure to reinsurers. A 62-day-old unresolved settlement on $890K raises questions about reinsurer creditworthiness, treaty dispute potential, and the ultimate collectibility of the receivable. If the settlement delay extends beyond 90 days, this could trigger impairment considerations under applicable accounting standards. Additionally, document **100000227** (Reinsurance premium accrual of $2,180,000 posted at 23:22) indicates active reinsurance transactions are being posted under anomalous conditions. The combination of delayed settlements and after-hours reinsurance entries warrants enhanced scrutiny of the reinsurance accounting cycle. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Control Risk 6: Account 1100100 — Premiums Receivable — Open Customer Confirmations
+
+| Field | Detail |
+|---|---|
+| **Account Code** | 1100100 |
+| **Account Name** | Premiums Receivable |
+| **Control Failure Type** | Unconfirmed Receivables / Revenue Recognition Dependency |
+| **Specific Evidence** | Account 1100100 (Premiums Receivable) has a GL balance of **$87,300,000** with **$1,200,000 in open reconciling items** aged **45 days**. Notes state "3 invoices pending customer confirmation." In the context of insurance premium accounting, unconfirmed receivables may indicate revenue recognized on policies where the policyholder has not acknowledged or accepted the premium obligation. Combined with the **duplicate premium entries** (documents 100000225/100000226 for $847,320 each), there is a risk that premium revenue and the corresponding receivable/cash are overstated. The $1.2M pending confirmation should be reviewed against the duplicate entry amounts to determine overlap. |
+| **Risk Level** | **MEDIUM** |
+
+---
+
+### Control Risk 7: Aggregate Reconciliation Completion Rate — 27% Incomplete
+
+| Field | Detail |
+|---|---|
+| **Account Code** | Multiple (8 accounts) |
+| **Account Name** | Various |
+| **Control Failure Type** | Systemic Reconciliation Timeliness Failure |
+| **Specific Evidence** | Of 30 accounts requiring reconciliation, only **22 are complete** (73.3%). Seven accounts remain **In Progress** and one is **Not Started**. An incomplete rate of 26.7% at the time of close package review indicates the monthly close process is not functioning within acceptable timelines. The aggregate open reconciling items across the 7 in-progress accounts total approximately **$6,040,000**. For an insurance company subject to statutory filing requirements and regulatory oversight, incomplete reconciliations at period-end create a risk that the financial statements contain undetected errors. The in-progress accounts include some of the most critical insurance balances: IBNR Reserve ($89M balance), Premiums Receivable ($87.3M), Equity Securities ($95M), and Reinsurance Receivable ($23.4M). |
+| **Risk Level** | **HIGH** |
+
+---
+
+## SECTION 4 — CONTROL RISK SUMMARY
+
+### Top 3 Highest Priority Risks Requiring Immediate Action
+
+**Priority 1: Reserve Manipulation Risk — Offsetting Manual Reserve Entries with SOD Violations**
+
+Documents 100000221 ($5.0M loss reserve increase by J. Smith), 100000230 ($4.75M loss reserve release by M. Rodriguez), and 100000222 ($1.842M IBNR posting self-approved by A. Chen) collectively represent approximately $11.6M in manual reserve movements within a single close period. The near-perfect offset between the loss reserve increase and decrease ($250K net), the SOD violation on the IBNR posting, the round-dollar nature of the $5.0M entry, the $2.1M in unsupported IBNR reconciling items pending actuarial support, and the fact that these entries involve the most judgmental and material balances on an insurance company's balance sheet collectively constitute the highest-priority risk. **Immediate action required:** Obtain independent actuarial documentation supporting each reserve entry, validate business rationale for the offsetting entries, and investigate the SOD violation on document 100000222.
+
+**Priority 2: Unreconciled Other Assets Account with Material Variance**
+
+Account 1700100 (Other Assets) has a $6.3M balance reflecting a 23.5% variance ($1.2M increase) with **zero reconciliation activity** (Not Started, Overdue, preparer K. Johnson). This represents a complete control void over a material balance that has grown significantly. **Immediate action required:** Escalate to the Controller; complete the reconciliation within 48 hours with independent review; obtain supporting documentation for the $1.2M increase; and determine whether any amounts should be reclassified or written off.
+
+**Priority 3: Pervasive Off-Hours Posting of Material Journal Entries with Questionable Approvals**
+
+54 of 231 entries (23.4%) were posted outside business hours, including at least 11 entries exceeding $1M posted between 10 PM and 3:06 AM. Deep-overnight entries include premium receipts, UPR movements, payroll, investment reclassifications, and tax provisions posted by multiple preparers (L. Patel, B. Williams, K. Johnson, A. Chen, M. Rodriguez). The approvals recorded at these hours (by T. Brown, S. Gupta, D. Lee, R. Davis, C. Wilson) cannot reasonably represent contemporaneous, informed review. **Immediate action required:** Interview approvers to confirm whether they actually reviewed and approved entries at the recorded times; implement system-level posting time restrictions in SAP; require delayed approval workflow for any entries posted outside 7 AM–6 PM.
+
+---
+
+### Overall Control Risk Rating: **HIGH**
+
+The monthly close control environment exhibits multiple simultaneous failures across all three lines of defense. The combination of SOD violations (in both journal entries and reconciliations), potential management override of reserve estimates, pervasive off-hours posting, incomplete reconciliations of material balances, round-dollar adjustments, duplicate entries, and aged reconciling items creates an environment where material misstatement—whether due to error or fraud—could occur and remain undetected.
+
+---
+
+### Key Themes Across All Three Data Sets
+
+1. **Reserve Integrity Compromise:** The journal entry data reveals offsetting manual reserve entries, SOD violations on IBNR postings, and round-dollar adjustments. The reconciliation data confirms the IBNR reserve has $2.1M in unsupported items pending actuarial analysis. The trial balance data shows the downstream impact through cash and loss account movements. The entire reserve estimation and recording cycle is compromised from origination through reconciliation.
+
+2. **Segregation of Duties Breakdown:** SOD failures appear in both journal entries (A. Chen self-approving document 100000222) and reconciliations (J. Smith self-approving account 2300100). These are not isolated incidents—they represent a systemic failure to enforce access controls in SAP and a cultural tolerance for control overrides. The affected accounts (IBNR Reserve and Deferred Tax Liability) are both high-judgment, high-risk balances.
+
+3. **Temporal Control Weakness — Off-Hours Activity:** The 23.4% off-hours posting rate creates a systemic control gap where the preventive control of real-time supervisory oversight is absent for nearly one-quarter of all entries. The affected entries span every major insurance accounting cycle: premiums, reserves, investments, reinsurance, payroll, and tax. This is not an isolated issue but a pervasive environmental weakness that undermines the reliability of all approval controls.
+
+4. **Reconciliation Process Insufficiency:** A 27% incomplete reconciliation rate, an account with zero reconciliation activity despite a 23.5% variance, a 91-day-old unresolved dispute, and $6.04M in aggregate open items across in-progress accounts indicate that the reconciliation process is not functioning as an effective detective control. The reconciliation process should be the safety net catching errors from journal entry processing—but it is failing to close in time to serve that purpose.
+
+5. **Concentration of Preparer Risk:** A small group of individuals (J. Smith, A. Chen, L. Patel, M. Rodriguez) are associated with the majority of anomalous entries. J. Smith prepared the $5.0M round-dollar reserve adjustment and has an SOD violation in reconciliations. A. Chen self-approved the IBNR posting. L. Patel posted a $3.0M round-dollar tax entry at 10:24 PM and multiple premium entries in the early morning hours. M. Rodriguez posted the $4.75M manual override and the $3.25M investment reclass at 2:27 AM. This concentration suggests either insufficient staffing (leading to control workarounds) or insufficient oversight of specific individuals.
+
+---
+
+## SECTION 5 — REMEDIATION AND AUTOMATION RECOMMENDATIONS
+
+### Risk 1: Reserve Manipulation / SOD Violations on Reserve Entries
+
+| Remediation Layer | Recommendation |
+|---|---|
+| **Immediate Fix** | Require independent actuarial sign-off documentation to be attached to every reserve journal entry (documents 100000221, 100000222, 100000230) before the close package is finalized. Retroactively obtain actuarial support for all March 2025 reserve entries. Immediately revoke A. Chen's ability to self-approve entries by correcting the SAP authorization matrix (transaction PFCG) to enforce dual-control on all entries to reserve accounts (2000100, 2000200). Place a hold on the close until reserve entries are independently validated. |
+| **Process Redesign** | Implement a formal reserve governance framework requiring: (1) All reserve entries >$500K must originate from or be reconciled to a documented actuarial analysis; (2) Reserve entries must be prepared by the actuarial/reserving team and independently approved by finance leadership (not the same team); (3) Any pair of offsetting reserve entries within the same period exceeding $1M must be flagged for CFO-level review with documented business rationale; (4) Monthly reserve bridge analysis comparing opening reserves, actuarial indications, management adjustments, and closing reserves must be presented to the Audit Committee. |
+| **Automation Opportunity** | Deploy **BlackLine Journal Entry Management** with automated SOD validation rules that block self-approved entries at the point of submission. Configure **SAP GRC Access Control (module 10.1)** to enforce preventive SOD checks on reserve-related transaction codes and maintain a continuous monitoring dashboard. Implement **Workiva** for the reserve bridge analysis workflow, linking actuarial model outputs directly to supporting documentation so that reserve entries can be automatically validated against actuarial source data with full audit trail. Use **SAP Process Control** to create automated monitoring rules that flag any journal entry to accounts 2000100, 2000200, or 2000300 exceeding $500K that lacks an attached actuarial certification document. |
+
+---
+
+### Risk 2: Unreconciled Other Assets Account (1700100) and Systemic Reconciliation Timeliness Failures
+
+| Remediation Layer | Recommendation |
+|---|---|
+| **Immediate Fix** | Escalate the overdue reconciliation of account 1700100 (Other Assets, $6.3M) to the Assistant Controller with a 48-hour completion deadline. Assign a preparer other than K. Johnson to eliminate any potential conflict and ensure fresh-eyes review. Require line-item detail for the $1.2M increase with supporting invoices, contracts, or schedules. For the 7 in-progress reconciliations, establish a 5-business-day hard deadline from period-end with daily status reporting to the Controller. The $400K aged item on account 1500200 (91 days) must be escalated to the CFO for resolution decision (write-off, reclassification, or documented rationale for continued carry). |
+| **Process Redesign** | Implement a tiered reconciliation calendar based on account materiality and risk: Tier 1 (reserves, cash, investments, receivables >$50M) must be completed within 3 business days of month-end; Tier 2 (all other balance sheet accounts >$5M) within 5 business days; Tier 3 (remaining accounts) within 7 business days. Institute a formal escalation protocol: any reconciliation not started by Day 3 triggers automatic email to the Controller; not started by Day 5 triggers CFO notification. Require mandatory aging analysis of all reconciling items with a 60-day resolution policy and mandatory write-off/reclassification decision at 90 days. |
+| **Automation Opportunity** | Implement **BlackLine Account Reconciliation** to automate the reconciliation workflow, enforce completion deadlines through automated task assignment and escalation, and provide real-time dashboards showing reconciliation status by account, preparer, and aging bucket. Configure **BlackLine Matching** to auto-certify low-risk reconciliations where the sub-ledger and GL agree within tolerance. Deploy **UiPath RPA bots** to extract SAP trial balance data (transaction FBL3N/FAGLL03) and automatically populate reconciliation templates, reducing manual data gathering time by 60–70%. Use **Workiva** to create a connected close management dashboard that prevents the close package from being finalized until all Tier 1 and Tier 2 reconciliations are marked complete with approver sign-off. |
+
+---
+
+### Risk 3: Pervasive Off-Hours Posting and Questionable Approval Integrity
+
+| Remediation Layer | Recommendation |
+|---|---|
+| **Immediate Fix** | Conduct interviews with all approvers (T. Brown, D. Lee, S. Gupta, R. Davis, C. Wilson) who are recorded as approving entries between 10 PM and 7 AM to determine whether they performed contemporaneous review or whether approvals were pre-authorized, delegated, or rubber-stamped. Specifically investigate T. Brown's approval of document 100000223 ($3.25M investment reclass) at 02:27 AM and S. Gupta's approval of document 100000050 ($1.003M payroll) at 01:56 AM. Immediately implement a SAP posting time restriction (via transaction SM30/table TVARV or custom authorization checks) blocking manual journal entries outside 7:00 AM–8:00 PM, with exceptions requiring Controller-level emergency override with documented justification. |
+| **Process Redesign** | Establish a formal after-hours posting policy: (1) All entries posted outside 7 AM–6 PM must have pre-approval from the Controller via a documented request form specifying business justification; (2) After-hours entries must be independently re-reviewed by a second approver on the next business day; (3) Monthly reporting to the CFO/Audit Committee on the volume and nature of off-hours entries as a KPI. Separate batch/automated entries from manual entries in SAP using distinct document types—automated batch postings (e.g., premium receipts from policy admin systems) should be clearly distinguishable from manual entries, and only automated entries should be permitted during overnight windows. Reduce the need for off-hours postings by optimizing the close calendar to provide adequate time during business hours. |
+| **Automation Opportunity** | Configure **SAP GRC Process Control** to run continuous monitoring rules that flag all manual journal entries posted outside defined business hours and generate automated alerts to the Controller and Internal Audit in real-time. Implement **SAP Workflow (transaction SWDD)** to require electronic two-step approval for all entries >$500K, with the system capturing IP address, device, and timestamp of the approval action to verify authenticity. Deploy **Automation Anywhere or UiPath RPA** to automate recurring month-end entries (premium receipts, UPR movements, payroll accruals) that currently appear to be posted manually—this eliminates the need for human intervention during off-hours for routine entries. Implement **BlackLine Journal Entry Management** with risk-scoring algorithms that automatically assign entries a risk score based on amount, posting time, preparer, account, and description, routing high-risk entries to enhanced review queues. |
+
+---
+
+### Risk 4: Duplicate Premium Receipt Entries (Revenue Overstatement Risk)
+
+| Remediation Layer | Recommendation |
+|---|---|
+| **Immediate Fix** | Immediately investigate documents 100000225 (K. Johnson, $847,320, 2025-03-08) and 100000226 (B. Williams, $847,320, 2025-03-15) to determine whether they represent the same underlying commercial premium transaction. Obtain the source policy/invoice documentation for both entries. If confirmed as a duplicate, reverse one entry before the close is finalized, with a correcting entry documented as to the root cause. Notify the financial reporting team of the potential $847,320 overstatement in premium revenue (4000100) and cash (1000100). |
+| **Process Redesign** | Implement a mandatory unique reference field (policy number, invoice number, or cash receipt reference) for all premium journal entries in SAP. Establish a duplicate detection review as a standard close procedure where a query is run on all entries sharing the same amount, account combination, and description within the period. Assign premium receipt entry responsibility to a single preparer per commercial line to prevent two individuals from independently booking the same transaction. |
+| **Automation Opportunity** | Configure **SAP duplicate payment/posting detection** (standard functionality in SAP FI, configurable via transaction OB41 / message control for duplicate invoice checks). Implement **BlackLine Transaction Matching** to automatically match premium receipts from the policy administration system to GL entries, flagging any GL entry without a matching source system record. Deploy **Alteryx or SAP Analytics Cloud** to run automated duplicate detection analytics on the full journal entry population at month-end, flagging entries with matching amounts, accounts, and descriptions for investigation before close sign-off. |
+
+---
+
+### Risk 5: Deferred Tax Liability Reconciliation SOD Violation Combined with Round-Dollar Tax Entry
+
+| Remediation Layer | Recommendation |
+|---|---|
+| **Immediate Fix** | Immediately reassign the reconciliation of account 2300100 (Deferred Tax Liability) from J. Smith to an independent preparer, and have a different individual perform the approval. Re-perform the reconciliation with independent review to validate the balance, including tracing the $3.0M tax provision adjustment (document 100000231) to supporting tax calculations. Obtain the effective tax rate computation and deferred tax roll-forward schedule to validate the $3.0M entry. Correct the SAP reconciliation workflow authorization to prevent J. Smith from approving their own reconciliation. |
+| **Process Redesign** | Implement a tax close governance process requiring: (1) All tax provision entries must be supported by a documented tax provision workbook reviewed by the tax director before posting; (2) Deferred tax reconciliation must be prepared by the tax team and approved by someone in the Controller's group (not tax); (3) Quarterly independent review of the deferred tax roll-forward by an external tax advisor or internal audit. Establish a policy that no individual may serve as both journal entry preparer and reconciliation preparer/approver for the same account in any given period. |
+| **Automation Opportunity** | Implement **SAP GRC Access Control** to enforce SOD rules across both journal entry posting and reconciliation approval for the same account, generating preventive blocks rather than detective reports. Deploy **Workiva Tax Provision** module to create a connected tax provision workflow where the effective tax rate calculation, temporary difference analysis, and resulting journal entry are all linked in a single auditable platform with enforced preparer/reviewer separation. Use **BlackLine Task Management** to enforce reconciliation preparer/approver assignments with system-level SOD checks that prevent the same user from occupying both roles. |
+
+---
+
+**Report Conclusion:** The March 2025 monthly close package exhibits systemic control deficiencies across journal entry processing, trial balance integrity, and account reconciliation. The convergence of SOD violations, potential reserve manipulation through offsetting manual entries, pervasive off-hours posting undermining approval integrity, unreconciled material balances with significant variances, duplicate revenue entries, and aged reconciling items collectively warrants an overall **HIGH** control risk rating. The insurance-specific nature of the most significant findings—particularly around loss reserves and IBNR—elevates the regulatory risk dimension, as these balances directly impact statutory surplus, risk-based capital, and policyholder protection. Immediate remediation actions should be initiated before the close is finalized, with structural process and technology improvements implemented over the next 60–90 days.

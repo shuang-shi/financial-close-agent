@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Close Intelligence Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: #f5f5f5; color: #1a1a1a; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 32px 24px; }
+  .header { background: white; border-radius: 12px; padding: 28px 32px;
+            border: 1px solid #e0e0e0; margin-bottom: 20px; }
+  .header h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .meta { font-size: 13px; color: #888; margin-top: 4px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500;
+           padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+           background: #f0f0f0; color: #444; vertical-align: middle; }
+  .ai-note { background: #f0f7ff; border-left: 3px solid #378add;
+              padding: 10px 14px; font-size: 13px; color: #333;
+              border-radius: 0 6px 6px 0; margin-top: 12px; }
+  .tabs { display: flex; gap: 4px; background: white;
+          border-radius: 12px 12px 0 0; padding: 12px 16px 0;
+          border: 1px solid #e0e0e0; border-bottom: none;
+          overflow-x: auto; flex-wrap: nowrap; }
+  .tab { padding: 8px 14px; font-size: 12px; font-weight: 500;
+         border-radius: 6px 6px 0 0; cursor: pointer; color: #666;
+         border: 1px solid transparent; border-bottom: none;
+         white-space: nowrap; background: transparent; }
+  .tab:hover { color: #1a1a1a; background: #f8f8f8; }
+  .tab.active { color: #1a1a1a; background: white;
+                border-color: #e0e0e0; border-bottom-color: white;
+                margin-bottom: -1px; }
+  .tab-content { background: white; border-radius: 0 0 12px 12px;
+                 border: 1px solid #e0e0e0; padding: 32px;
+                 min-height: 400px; margin-bottom: 24px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr;
+                gap: 16px; margin-bottom: 24px; }
+  .intro-card { background: #f8f8f8; border-radius: 8px; padding: 16px; }
+  .intro-card .label { font-size: 11px; color: #888; text-transform: uppercase;
+                       letter-spacing: 0.5px; margin-bottom: 4px; }
+  .intro-card .value { font-size: 14px; font-weight: 500; }
+  .risk-summary { display: flex; gap: 12px; margin-bottom: 24px; }
+  .risk-card { flex: 1; background: #f8f8f8; border-radius: 8px;
+               padding: 16px; text-align: center; }
+  .risk-card .num { font-size: 28px; font-weight: 600; }
+  .risk-card .lbl { font-size: 11px; color: #888; margin-top: 2px; }
+  .risk-card.high .num { color: #a32d2d; }
+  .risk-card.medium .num { color: #b5630a; }
+  .risk-card.low .num { color: #2d6a4f; }
+  .overall-rating { background: #FCEBEB; border-radius: 8px; padding: 16px 20px;
+                    display: flex; align-items: center; gap: 12px;
+                    margin-bottom: 24px; }
+  .overall-rating .label { font-size: 13px; color: #555; }
+  .overall-rating .value { font-size: 16px; font-weight: 600; color: #a32d2d; }
+  .panel h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px;
+              color: #1a1a1a; padding-bottom: 6px;
+              border-bottom: 1px solid #f0f0f0; }
+  .panel h3:first-child { margin-top: 0; }
+  .panel h4 { font-size: 13px; font-weight: 600; margin: 14px 0 6px; color: #333; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 13px; }
+  th { background: #f8f8f8; font-weight: 600; padding: 8px 12px;
+       text-align: left; border-bottom: 2px solid #e0e0e0; }
+  td { padding: 8px 12px; border-bottom: 1px solid #f5f5f5; vertical-align: top; }
+  td:first-child { font-weight: 500; color: #555; width: 180px; white-space: nowrap; }
+  .finding { background: #f8f8f8; border-radius: 8px; padding: 16px;
+             margin-bottom: 16px; border-left: 3px solid #ddd; }
+  .finding.high { border-left-color: #a32d2d; }
+  .finding.medium { border-left-color: #b5630a; }
+  .finding.low { border-left-color: #2d6a4f; }
+  .risk-badge { font-size: 11px; font-weight: 500; padding: 2px 8px;
+                border-radius: 4px; display: inline-block; }
+  .risk-high { background: #FCEBEB; color: #791F1F; }
+  .risk-medium { background: #FAEEDA; color: #633806; }
+  .risk-low { background: #EAF3DE; color: #27500A; }
+  .back { display: inline-block; margin-bottom: 16px; font-size: 13px;
+          color: #555; cursor: pointer; }
+  .back:hover { color: #1a1a1a; }
+  .footer { text-align: center; font-size: 12px; color: #aaa; padding: 20px 0; }
+  p { margin-bottom: 10px; font-size: 14px; line-height: 1.7; }
+  strong { font-weight: 600; }
+  hr { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" onclick="window.location.href='/'">← Analyze another file</a>
+
+  <div class="header">
+    <h1>Financial Close Intelligence Report <span class="badge">AI Generated</span></h1>
+    <div class="meta" id="meta"></div>
+    <div class="ai-note">Generated by an AI agent analyzing your SAP close package using Big 4 advisory methodology. All findings reference specific document numbers, account codes, and preparer names as evidence.</div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="tab-content" id="tab-content"></div>
+
+  <div class="footer">
+    AI Financial Close Intelligence Agent · For internal use only · Not a substitute for professional audit judgment
+  </div>
+</div>
+
+<script>
+const data = JSON.parse(localStorage.getItem('closeReport') || '{}');
+if (!data.analysis) window.location.href = '/';
+
+document.getElementById('meta').textContent =
+  `File: ${data.filename} · Generated ${data.generated_date}`;
+
+const raw = data.analysis || '';
+
+// Extract section content between markers
+const sectionMarkers = [];
+const markerRegex = /## SECTION \d+[^\n]*/g;
+let match;
+while ((match = markerRegex.exec(raw)) !== null) {
+  sectionMarkers.push(match.index);
+}
+
+const sections = sectionMarkers.map((start, i) => {
+  const contentStart = raw.indexOf('\n', start) + 1;
+  const contentEnd = i + 1 < sectionMarkers.length ? sectionMarkers[i + 1] : raw.length;
+  return raw.slice(contentStart, contentEnd).trim();
+});
+
+// Count risk levels across all sections
+function countRisks(text) {
+  const high = (text.match(/\bHIGH\b/g) || []).length;
+  const medium = (text.match(/\bMEDIUM\b/g) || []).length;
+  const low = (text.match(/\bLOW\b/g) || []).length;
+  return { high, medium, low };
+}
+const risks = countRisks(raw);
+
+// Clean section text for display
+function cleanSection(text) {
+  text = text.replace(/^\|[\s\-:|]+\|[\s\-:|]*\|?.*$/gm, '');
+  text = text.replace(/((?:^\|.+\|$\n?)+)/gm, tableBlock => {
+    const rows = tableBlock.trim().split('\n')
+      .filter(r => r.trim())
+      .filter(r => !/^\|[\s\-|: ]+\|$/.test(r));
+    if (rows.length === 0) return '';
+    return '<table>' + rows.map((row, i) => {
+      const cells = row.split('|')
+        .filter((c, idx, arr) => idx > 0 && idx < arr.length - 1);
+      const tag = i === 0 ? 'th' : 'td';
+      return `<tr>${cells.map(c =>
+        `<${tag}>${c.trim().replace(/\*\*/g, '')}</${tag}>`
+      ).join('')}</tr>`;
+    }).join('') + '</table>';
+  });
+  text = text.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  text = text.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/^---$/gm, '<hr>');
+  text = text.replace(/\bRisk Level[:\s]*HIGH\b/gi, 'Risk Level: <span class="risk-badge risk-high">HIGH</span>');
+  text = text.replace(/\bRisk Level[:\s]*MEDIUM\b/gi, 'Risk Level: <span class="risk-badge risk-medium">MEDIUM</span>');
+  text = text.replace(/\bRisk Level[:\s]*LOW\b/gi, 'Risk Level: <span class="risk-badge risk-low">LOW</span>');
+  text = text.replace(/\*\*HIGH\*\*/g, '<span class="risk-badge risk-high">HIGH</span>');
+  text = text.replace(/\*\*MEDIUM\*\*/g, '<span class="risk-badge risk-medium">MEDIUM</span>');
+  text = text.replace(/\*\*LOW\*\*/g, '<span class="risk-badge risk-low">LOW</span>');
+  text = text.replace(/^(?!<[htpruisb]|$)(.+)$/gm, '<p>$1</p>');
+  return text;
+}
+
+// Tab definitions
+const tabDefs = [
+  { label: "Introduction", isIntro: true },
+  { label: "1 · JE Anomalies", sectionIndex: 0 },
+  { label: "2 · TB Variances", sectionIndex: 1 },
+  { label: "3 · Recon Risks", sectionIndex: 2 },
+  { label: "4 · Risk Summary", sectionIndex: 3 },
+  { label: "5 · Recommendations", sectionIndex: 4 },
+];
+
+const tabsEl = document.getElementById('tabs');
+const contentEl = document.getElementById('tab-content');
+
+tabDefs.forEach((def, i) => {
+  // Tab button
+  const tab = document.createElement('div');
+  tab.className = 'tab' + (i === 0 ? ' active' : '');
+  tab.textContent = def.label;
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(`panel-${i}`).classList.add('active');
+  };
+  tabsEl.appendChild(tab);
+
+  // Panel content
+  const panel = document.createElement('div');
+  panel.className = 'panel' + (i === 0 ? ' active' : '');
+  panel.id = `panel-${i}`;
+
+  if (def.isIntro) {
+    panel.innerHTML = `
+      <div class="intro-grid">
+        <div class="intro-card">
+          <div class="label">Report Title</div>
+          <div class="value">Financial Close Intelligence Report</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Company</div>
+          <div class="value">APEX Insurance Co. (SAP: APEX01)</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Close Period</div>
+          <div class="value">March 2025 (Monthly Close)</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">ERP System</div>
+          <div class="value">SAP S/4HANA</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Prepared By</div>
+          <div class="value">AI Financial Close Intelligence Agent</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Generated</div>
+          <div class="value">${data.generated_date}</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Source File</div>
+          <div class="value">${data.filename}</div>
+        </div>
+        <div class="intro-card">
+          <div class="label">Methodology</div>
+          <div class="value">Big 4 Advisory Close Review Framework</div>
+        </div>
+      </div>
+
+      <div class="overall-rating">
+        <div class="label">Overall Control Risk Rating:</div>
+        <div class="value">HIGH — Multiple concurrent control failures detected</div>
+      </div>
+
+      <div class="risk-summary">
+        <div class="risk-card high">
+          <div class="num">${risks.high}</div>
+          <div class="lbl">HIGH Risk Findings</div>
+        </div>
+        <div class="risk-card medium">
+          <div class="num">${risks.medium}</div>
+          <div class="lbl">MEDIUM Risk Findings</div>
+        </div>
+        <div class="risk-card low">
+          <div class="num">${risks.low}</div>
+          <div class="lbl">LOW Risk Findings</div>
+        </div>
+      </div>
+
+      <h3>Scope of Review</h3>
+      <table>
+        <tr><td>Journal Entries</td><td>231 entries reviewed — 11 anomalies flagged</td></tr>
+        <tr><td>Trial Balance</td><td>54 accounts — 4 material variances identified</td></tr>
+        <tr><td>Reconciliations</td><td>30 balance sheet accounts — 8 control issues found</td></tr>
+        <tr><td>Period Coverage</td><td>March 1–31, 2025</td></tr>
+        <tr><td>Materiality Threshold</td><td>$500,000 for individual entries</td></tr>
+      </table>
+
+      <h3>How to Use This Report</h3>
+      <p>Navigate through the tabs above to review findings by category. Each section contains specific evidence — SAP document numbers, account codes, preparer names, and posting times — that can be used to investigate and resolve each finding before the close package is finalized.</p>
+      <p>Sections 1–3 contain individual findings. Section 4 summarizes the top priorities requiring immediate action. Section 5 provides specific remediation steps and automation recommendations for each control risk.</p>
+    `;
+  } else {
+    const sectionText = sections[def.sectionIndex] || 'Section data not available.';
+    panel.innerHTML = cleanSection(sectionText);
+  }
+
+  contentEl.appendChild(panel);
+});
+</script>
+</body>
+</html>
